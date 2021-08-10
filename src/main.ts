@@ -30,7 +30,7 @@ import S3 from './s3-client';
 interface S3ActionConfig {
   'upload-this-branch'?: boolean;
   'object-format'?: string;
-  'use-wasabi'?: boolean;
+  'endpoint-override'?: string;
   'secret-key': string;
   'access-key': string;
   directories: string[];
@@ -44,7 +44,7 @@ const lstat = promisify(_lstat);
 const config = new Config<S3ActionConfig>({
   'upload-this-branch': <any> core.getInput('upload-this-branch', { trimWhitespace: true }),
   'object-format': core.getInput('object-format', { trimWhitespace: true }),
-  'use-wasabi': <any> core.getInput('use-wasabi', { trimWhitespace: true }),
+  'endpoint-override': <any> core.getInput('endpoint-override', { trimWhitespace: true }),
   'access-key': <any> core.getInput('access-key', { trimWhitespace: true }),
   'secret-key': <any> core.getInput('secret-key', { trimWhitespace: true }),
   directories: <any> core.getInput('directories', { trimWhitespace: true }),
@@ -63,9 +63,9 @@ const config = new Config<S3ActionConfig>({
     type: 'string'
   },
 
-  'use-wasabi': {
+  'endpoint-override': {
     required: false,
-    type: 'boolean'
+    type: 'string'
   },
 
   'access-key': {
@@ -116,7 +116,7 @@ const config = new Config<S3ActionConfig>({
   const secretKey = config.getInput('secret-key', '')!;
   const accessKey = config.getInput('access-key', '');
   const excludeDirs = config.getInput('exclude', []);
-  const useWasabi = config.getInput('use-wasabi', false);
+  const endpointOverride = config.getInput('endpoint-override', '');
   const directories = config.getInput('directories', []);
   const region = config.getInput('region', 'us-east-1');
   const bucketName = config.getInput('bucket', '');
@@ -125,7 +125,7 @@ const config = new Config<S3ActionConfig>({
   core.info([
     '',
     `> Exclude Directories: ${(excludeDirs || []).join(', ') || 'None set.'}`,
-    `> Use Wasabi Servers : ${useWasabi ? 'Yes' : 'No'}`,
+    `> Use Custom Endpoint: ${endpointOverride !== '' ? endpointOverride : 'No'}`,
     `> Directories        : ${directories.join(', ')}`,
     `> Bucket Region      : ${region}`
   ].join('\n'));
@@ -134,7 +134,7 @@ const config = new Config<S3ActionConfig>({
     accessKey,
     secretKey,
     bucketName,
-    useWasabi,
+    endpointOverride,
     region
   );
 

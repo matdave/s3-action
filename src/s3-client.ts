@@ -35,7 +35,7 @@ export default class S3 {
     private accessKey: string,
     private secretKey: string,
     private bucket:    string,
-    private useWasabi: boolean = true,
+    private endpointOverride: string = '',
     private region:    string = 'us-east-1'
   ) {
     this.client = this.createS3Client();
@@ -53,12 +53,10 @@ export default class S3 {
       accessKeyId: this.accessKey
     });
 
-    const endpointOverride = this.useWasabi ? 'https://s3.wasabisys.com' : '';
-
-    core.debug(`Created S3 client${endpointOverride !== '' ? ', with Wasabi!' : '.'}`);
+    core.debug(`Created S3 client${this.endpointOverride !== '' ? ', with custom endpoint!' : '.'}`);
     return new S3Client({
       credentialDefaultProvider: defaultCredentialsProvider,
-      endpoint: endpointOverride,
+      endpoint: this.endpointOverride,
       region: this.region
     });
   }

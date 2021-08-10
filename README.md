@@ -16,7 +16,7 @@ jobs:
           node-version: 16.x
 
       - name: upload to s3 bucket
-        uses: noelware/s3-action@v1.2.0
+        uses: matdave/s3-action@v1.2.0
         with:
           directories: './directories;./to;./use'
           access-key: <aws s3 access key>
@@ -32,7 +32,7 @@ jobs:
 |`directories`|`String[]`|List of directories to use, glob patterns are supported, use `;` to seperate|true|None.|
 |`access-key`|`String`|Your S3 access key to use to authenicate|true|None.|
 |`secret-key`|`String`|Your S3 secret key to use to authenicate`|true|None.|
-|`use-wasabi`|`Boolean`|Uses Wasabi internal servers instead of Amazon internal servers.|false|`false`|
+|`endpoint-override`|`String`|Specify a custom endpoint to upload the object to.|false|None.|
 |`exclude`|`String`|Excludes any directories to not be uploaded, glob patterns are supported, use `;` to seperate|false|None.|
 |`region`|`String`|Sets the region of the S3 bucket that it is located in|false|`us-east-1`|
 |`bucket`|`String`|The bucket to use when uploading objects|true|None.|
