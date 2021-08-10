@@ -1,8 +1,9 @@
 /**
- * `@noelware/gh-s3-action` is a GitHub Action to publish contents of a
+ * `matdave/gh-s3-action` is a GitHub Action to publish contents of a
  * GitHub repository to a S3 bucket.
  *
- * Copyright (c) 2021-present Noelware
+ * Copyright (c) 2021-present MatDave
+ * Modified from @noelware/gh-s3-action
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
