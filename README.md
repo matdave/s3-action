@@ -48,3 +48,6 @@ The file format can have the following properties:
 
 ## License
 **s3-action** is released under the **GPL-3.0** License.
+
+## Credit
+Originally developed by https://github.com/Noelware/s3-action and repurposed to allow any endpoint
