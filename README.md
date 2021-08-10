@@ -16,7 +16,7 @@ jobs:
           node-version: 16.x
 
       - name: upload to s3 bucket
-        uses: matdave/s3-action@v1.2.0
+        uses: matdave/s3-action@master
         with:
           directories: './directories;./to;./use'
           access-key: <aws s3 access key>
